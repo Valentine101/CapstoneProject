@@ -1,0 +1,14 @@
+:root {
+    --gs-blue: #011E41;
+    --gs-gold: #87714D;
+    --gs-gray: #A3AAAE;
+}
+
+.gs-background-blue {
+    background-color: var(--gs-blue);
+    border-color: var(--gs-blue)
+}
+
+.gs-text-gray {
+    color: var(--gs-gray)
+}
