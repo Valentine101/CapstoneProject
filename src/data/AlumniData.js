@@ -84,6 +84,18 @@ const alumniData = [
 
     },
     {
+        name: "Kurt Taylor",
+        class: 2019,
+        sport: "Baseball",
+        image: "images/profile-photo-1.jpeg",
+        city: "Atlanta",
+        state: "GA",
+        medias: [
+
+        ]
+
+    },
+    {
 
     }
 ]
