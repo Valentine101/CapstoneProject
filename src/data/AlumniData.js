@@ -53,7 +53,15 @@ const alumniData = [
 
     },
     {
+        name: "YEEEEEEEEEEE",
+        class: 2021,
+        sport: "Baller",
+        image: "images/profile-photo-1.jpeg",
+        city: "The",
+        state: "Streets",
+        medias: [
 
+        ]
     },
     {
 
