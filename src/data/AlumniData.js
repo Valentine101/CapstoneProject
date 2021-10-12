@@ -50,7 +50,15 @@ const alumniData = [
         ]
     },
     {
+        name: "test123",
+        class: 2021,
+        sport: "all round athlete",
+        image: "images/profile-photo-1.jpeg",
+        city: "Atlanta",
+        state: "GA",
+        medias: [
 
+        ]
     },
     {
         name: "YEEEEEEEEEEE",
