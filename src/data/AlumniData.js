@@ -96,7 +96,15 @@ const alumniData = [
 
     },
     {
+        name: "Joshua Lee",
+        class: 2021,
+        sport: "Football",
+        image: "images/profile-photo-1.jpeg",
+        city: "Columbus",
+        state: "GA",
+        medias: [
 
+        ]
     }
 ]
 
