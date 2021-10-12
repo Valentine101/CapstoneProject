@@ -39,7 +39,15 @@ const alumniData = [
         ]
     },
     {
+        name: "Valentine Was Here",
+        class: 2021,
+        sport: "unAthletic",
+        image: "images/profile-photo-1.jpeg",
+        city: "Gotham",
+        state: "America",
+        medias: [
 
+        ]
     },
     {
 
