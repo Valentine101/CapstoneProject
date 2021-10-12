@@ -64,6 +64,15 @@ const alumniData = [
         ]
     },
     {
+        name: "Logan Gray",
+        class: 2021,
+        sport: "Soccer",
+        image: "images/profile-photo-1.jpeg",
+        city: "Atlanta",
+        state: "GA",
+        medias: [
+
+        ]
 
     },
     {
