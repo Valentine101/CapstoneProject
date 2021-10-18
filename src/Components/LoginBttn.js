@@ -19,7 +19,7 @@ const LoginBttn = () => {
                 buttonText="Login"
                 onSuccess={onSuccess}
                 onFailure={onFailure}
-                cookiePolicy={'https://soaringeagles.herokuapp.com'}
+                cookiePolicy={'none'}
                 isSignedIn={true}
             />
         
