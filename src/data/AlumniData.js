@@ -8,6 +8,7 @@ const alumniData = [
         image: "images/profile-photo-1.jpeg",
         city: "Statesboro",
         state: "GA",
+        major: "Math",
         medias: [
             {
                 platform: "Facebook",
@@ -34,6 +35,7 @@ const alumniData = [
         image: "images/profile-photo-1.jpeg",
         city: "Atlanta",
         state: "GA",
+        major: "Computer Science",
         medias: [
 
         ]
@@ -45,6 +47,7 @@ const alumniData = [
         image: "images/profile-photo-1.jpeg",
         city: "Gotham",
         state: "America",
+        major: "Computer Science",
         medias: [
 
         ]
@@ -56,6 +59,7 @@ const alumniData = [
         image: "images/profile-photo-1.jpeg",
         city: "Atlanta",
         state: "GA",
+        major: "Computer Science",
         medias: [
 
         ]
@@ -67,6 +71,7 @@ const alumniData = [
         image: "images/profile-photo-1.jpeg",
         city: "The",
         state: "Streets",
+        major: "Computer Science",
         medias: [
 
         ]
@@ -78,6 +83,7 @@ const alumniData = [
         image: "images/profile-photo-1.jpeg",
         city: "Atlanta",
         state: "GA",
+        major: "Computer Science",
         medias: [
 
         ]
@@ -90,6 +96,7 @@ const alumniData = [
         image: "images/profile-photo-1.jpeg",
         city: "Atlanta",
         state: "GA",
+        major: "Computer Science",
         medias: [
 
         ]
@@ -102,6 +109,7 @@ const alumniData = [
         image: "images/profile-photo-1.jpeg",
         city: "Columbus",
         state: "GA",
+        major: "Computer Science",
         medias: [
 
         ]
