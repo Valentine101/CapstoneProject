@@ -1,23 +1,26 @@
-import React, { Component } from 'react'
-import GoogleLogin from 'react-google-login';
+import React from 'react'
+import { GoogleLogin } from 'react-google-login';
 
 
 
 const LoginBttn = () => {
-        const responseGoogle= (response) => {
-        console.log(response);
-        console.log(response.profileObj);
-    }
+        const onSuccess = (response) => {
+            console.log('[Login Sucess] currentUser:', response.profileObj);
+        };
+        const onFailure = (response) => {
+            console.log('[Login failed] res:', response);
+        };
 
     return (
     
         <div>
             <GoogleLogin
-                clientId="136092104401-1s09m7fo1f1gqr3hh333bnl7q6f4gc7d.apps.googleusercontent.com"
+                clientId="2872629209-8glte87ut0c6kgnse8fhfnu7h8ltehp8.apps.googleusercontent.com"
                 buttonText="Login"
-                onSuccess={responseGoogle}
-                onFailure={responseGoogle}
+                onSuccess={onSuccess}
+                onFailure={onFailure}
                 cookiePolicy={'single_host_origin'}
+                isSignedIn={true}
             />
         
         </div>

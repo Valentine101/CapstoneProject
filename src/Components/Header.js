@@ -3,6 +3,7 @@ import Navbar from 'react-bootstrap/Navbar'
 import Container from 'react-bootstrap/Container'
 import Nav from 'react-bootstrap/Nav'
 import LoginBttn from './LoginBttn'
+import LogoutBttn from './LogoutBttn'
 
 const pages = ["Home","Search"]
 
@@ -20,6 +21,7 @@ const Header = () => {
                 </Nav>
                 </Navbar.Collapse>
                 <LoginBttn/>
+                <LogoutBttn/>
             </Container>
         </Navbar>
     )
