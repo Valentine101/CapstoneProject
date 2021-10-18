@@ -19,8 +19,7 @@ const LoginBttn = () => {
                 buttonText="Login"
                 onSuccess={onSuccess}
                 onFailure={onFailure}
-                cookiePolicy={'none'}
-                isSignedIn={true}
+                cookiePolicy={'single_host_origin'}
             />
         
         </div>
