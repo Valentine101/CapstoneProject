@@ -18,10 +18,10 @@
   },
   "scripts": {
     "start": "node server.js",
-    "build": "react-scripts build && mv build ./",
+    "build": "BUILD_PATH='./' react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "heroku-prebuild": "react-scripts build && mv build ./"
+    "heroku-prebuild": "BUILD_PATH='./' react-scripts build"
   },
   "eslintConfig": {
     "extends": [
