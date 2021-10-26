@@ -10,22 +10,10 @@ const alumniData = [
         state: "GA",
         major: "Math",
         medias: [
-            {
-                platform: "Facebook",
-                link: "https://www.facebook.com/"
-            },
-            {
-                platform: "Twitter",
-                link: "https://www.twitter.com"
-            },
-            {
-                platform: "Instagram",
-                link: "https://www.instagram.com"
-            },
-            {
-                platform: "Linked In",
-                link: "https://www.linkedin.com"
-            }
+            "https://www.facebook.com/",
+            "https://www.twitter.com",
+            "https://www.instagram.com",
+            "https://www.linkedin.com"
         ]
     },
     {

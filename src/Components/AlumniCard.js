@@ -1,8 +1,7 @@
 import { React } from 'react';
 import '../Styles/AlumniCard.css'
-import '../Styles/GSColors.css'
 import Card from 'react-bootstrap/Card'
-import Button from 'react-bootstrap/Button'
+import { SocialIcon } from 'react-social-icons';
 
 const AlumniCard = (props) => {
     props = props.alumni
@@ -19,12 +18,7 @@ const AlumniCard = (props) => {
                 <Card.Subtitle className="mb-2 text-muted">{props.city}, {props.state}</Card.Subtitle>
                 <Card.Subtitle className="mb-2 text-muted">{props.major}</Card.Subtitle>
                 {props.medias !== undefined && props.medias.map((media) =>
-                    <Button 
-                        className="gs-background-blue gs-text-gray" 
-                        key={media.platform} 
-                        onClick={() => window.open(media.link, "_blank")}
-                        >{media.platform}
-                    </Button>
+                    <SocialIcon url={media}/>
                 )}
             </Card.Body>
         </Card>
