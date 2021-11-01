@@ -9,3 +9,24 @@ app.get('/', function (req, res) {
 });
 
 app.listen(process.env.PORT || 9000);
+
+
+//API start of work
+const pool = require("./db");
+app.use(express.json());
+
+//API Routes
+
+//get All users in dummyData table
+app.get("/allUsers", async(req, res) => {
+  try{
+    const allUsers = await pool.query("SELECT * FROM dummyData");
+
+    res.json(newUsers.rows);
+  } 
+  catch (err) {
+    console.error(err.message);
+    res.send("Error");
+  }
+});
+
