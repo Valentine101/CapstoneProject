@@ -22,7 +22,7 @@ app.get("/allUsers", async(req, res) => {
   try{
     const allUsers = await pool.query("SELECT * FROM dummyData");
 
-    res.json(newUsers.rows);
+    res.json(allUsers.rows);
   } 
   catch (err) {
     console.error(err.message);
