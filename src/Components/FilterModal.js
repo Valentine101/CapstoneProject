@@ -1,16 +1,16 @@
 import React, { useState, useContext } from 'react';
 import { FilterContext } from '../data/FilterContext';
-import FilterPill from './FilterPill'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
+import Nav from 'react-bootstrap/Nav'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col'
 import SportData from '../data/SportData';
 import MajorData from '../data/MajorData'
 import StateData from '../data/StateData'
 
-const Filter = () => {
+const FilterModal = () => {
     
     const [filter, setFilter] = useContext(FilterContext)
     const [show,setShow] = useState(false)
@@ -41,17 +41,9 @@ const Filter = () => {
         setFilter(newFilter)
     }
 
-    const clearFilter = () => {
-        var newFilter = {...filter}
-        for (const f in newFilter) {
-            newFilter[f] = ""
-        }
-        setFilter(newFilter)
-    }
-
     return (
         <>
-            <Button onClick={open}>Filter</Button>
+            <Nav.Link onClick={open}>Filter</Nav.Link>
             <Modal show={show} onHide={close}>
                 <Form>
                     <Modal.Header closeButton>
@@ -117,12 +109,8 @@ const Filter = () => {
                     </Modal.Footer>
                 </Form>                
             </Modal>
-            <Button onClick={clearFilter}>Clear</Button>
-            {Object.getOwnPropertyNames(filter).filter(f => filter[f] !== "").map(f =>
-                <FilterPill filter={f} value={filter[f]}/>
-            )}
         </>
     )
 }
 
-export default Filter
+export default FilterModal

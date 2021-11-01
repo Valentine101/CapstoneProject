@@ -38,8 +38,8 @@ const AlumniCardGroup = () => {
     }
     return (
         <Row>
-            {filterCards(alumniData).map((alumni) =>
-                <AlumniCard alumni={alumni}/>
+            {filterCards(alumniData).map((alumni,index) =>
+                <AlumniCard key={"alumni"+index} alumni={alumni}/>
             )}
         </Row>
     )

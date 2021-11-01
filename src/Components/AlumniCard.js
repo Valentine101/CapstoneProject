@@ -17,8 +17,8 @@ const AlumniCard = (props) => {
                 <Card.Subtitle className="mb-2 text-muted">{props.sport}</Card.Subtitle>
                 <Card.Subtitle className="mb-2 text-muted">{props.city}, {props.state}</Card.Subtitle>
                 <Card.Subtitle className="mb-2 text-muted">{props.major}</Card.Subtitle>
-                {props.medias !== undefined && props.medias.map((media) =>
-                    <SocialIcon url={media}/>
+                {props.medias !== undefined && props.medias.map((media,index) =>
+                    <SocialIcon key={"media"+index} url={media}/>
                 )}
             </Card.Body>
         </Card>

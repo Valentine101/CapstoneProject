@@ -2,6 +2,7 @@ import React, {useContext} from 'react'
 import Badge from 'react-bootstrap/Badge'
 import CloseButton from 'react-bootstrap/CloseButton'
 import { FilterContext } from '../data/FilterContext';
+import Button from 'react-bootstrap/Button';
 
 const FilterPill = (props) => {
     
@@ -25,4 +26,30 @@ const FilterPill = (props) => {
     )
 }
 
-export default FilterPill
+const FilterPills = () => {
+    
+    const [filter, setFilter] = useContext(FilterContext)
+
+    const clearFilter = () => {
+        var newFilter = {...filter}
+        for (const f in newFilter) {
+            newFilter[f] = ""
+        }
+        setFilter(newFilter)
+    }
+
+    const filters = Object.getOwnPropertyNames(filter).filter(f => filter[f] !== "")
+    
+    return (
+        <>
+            {filters.length !== 0 && 
+                <Button onClick={clearFilter}>Clear</Button>
+            }
+            {filters.map((f,index) =>
+                <FilterPill key={"filter"+index} filter={f} value={filter[f]}/>
+            )}
+        </>
+    )
+}
+
+export default FilterPills

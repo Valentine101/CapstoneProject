@@ -4,8 +4,8 @@ import Container from 'react-bootstrap/Container'
 import Nav from 'react-bootstrap/Nav'
 import LoginBttn from './LoginBttn'
 import LogoutBttn from './LogoutBttn'
-
-const pages = ["Home","Search"]
+import FilterModal from './FilterModal'
+import AlumniFormModal from './AlumniFormModal';
 
 const Header = () => {
     return (
@@ -15,9 +15,8 @@ const Header = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                 <Navbar.Collapse>
                 <Nav>
-                    {pages.map((page) => 
-                        <Nav.Link key={page}>{page}</Nav.Link>
-                    )}
+                    <FilterModal/>
+                    <AlumniFormModal/>
                 </Nav>
                 </Navbar.Collapse>
                 <LoginBttn/>
