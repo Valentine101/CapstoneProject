@@ -1,12 +1,22 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import AlumniCard from './AlumniCard';
 import Row from 'react-bootstrap/Row'
-import alumniData from '../data/AlumniData';
+// import alumniData from '../data/AlumniData';
 import { FilterContext } from '../data/FilterContext';
 
 
 const AlumniCardGroup = () => {
     const [filter] = useContext(FilterContext)
+    const [alumniData, setAlumniData] = useState([])
+
+
+    fetch('http://localhost:9000/allUsers')
+        .then(res => res.json())
+        // .then(data => obj = data)
+        .then(data => setAlumniData(data))
+        // .then(() => alumniData = obj)
+
+
 
     function filterCards(alumni) {
         
@@ -29,7 +39,8 @@ const AlumniCardGroup = () => {
 
         return filteredAlumni
     }
-    if(filterCards(alumniData).length === 0){
+    if(alumniData.length === 0){
+    // if(filterCards(alumniData).length === 0){
         return (
             <div style={{fontSize: "50px", textAlign: "center"}}>
                 No Results
@@ -38,7 +49,8 @@ const AlumniCardGroup = () => {
     }
     return (
         <Row>
-            {filterCards(alumniData).map((alumni,index) =>
+            {alumniData.map((alumni,index) => 
+            // {filterCards(alumniData).map((alumni,index) =>
                 <AlumniCard key={"alumni"+index} alumni={alumni}/>
             )}
         </Row>
