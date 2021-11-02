@@ -2,13 +2,17 @@
 
 var alumniData = []
 
-var obj;
+const Http = new XMLHttpRequest();
+const url='http://localhost:9000/allUsers';
+Http.open("GET", url);
+Http.send();
 
-fetch('http://localhost:9000/allUsers')
-  .then(res => res.json())
-  .then(data => obj = data)
-  .then(() => alumniData = obj)
-
+Http.onreadystatechange = function() {
+  if (this.readyState==4 && this.status==200) {
+    console.log(Http.responseText);
+    alumniData = Http.responseText;
+  }
+}
 
 // const alumniData = [
 //     {
