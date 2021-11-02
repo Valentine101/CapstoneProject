@@ -1,11 +1,11 @@
 import { React } from 'react';
 import AlumniCardGroup from './AlumniCardGroup'
-import Filter from './Filter'
+import FilterPills from './FilterPills';
 
 const Body = () => {
     return (
         <div style={{backgroundColor: "grey"}}>
-            <Filter/>
+            <FilterPills/>
             <AlumniCardGroup/>
         </div>
     )
