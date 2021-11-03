@@ -20,7 +20,7 @@ app.use(express.json());
 //get All users in dummyData table
 app.get("/allUsers", async(req, res) => {
   try{
-    const allUsers = await pool.query("SELECT * FROM dummyData");
+    const allUsers = await pool.query("SELECT * FROM users JOIN profile USING (id)");
 
     res.json(allUsers.rows);
   } 
@@ -34,7 +34,7 @@ app.get("/allUsers", async(req, res) => {
 app.get("/user/:id", async(req, res) => {
   const { id } = req.params;
   try {
-    const user = await pool.query("SELECT * FROM dummyData WHERE user_id = $1",
+    const user = await pool.query("SELECT * FROM users JOIN profile USING (id) WHERE id = $1",
     [id]);
 
     res.json(user.rows[0]);
