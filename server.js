@@ -50,46 +50,73 @@ app.post("/createUser", async(req, res) => {
     //console.log(req.body);
     var data = req.body;
 
-    const first_name = data.first_name;
-    const last_name = data.last_name;
+    const id = data.id;
+    const name = data.name;
+    const email = data.email;
+    const class1 = data.class;
+    const major = data.major;
+    const sport = data.sport;
+    const city = data.city;
+    const state = data.state;
+    const image = data.image;
+    const socials = data.socials;
 
     //test if a json formated body was submitted with post request
-    if(!first_name && !last_name) {
-      res.status(418).send({ message: "We need a first & last name!!"});
+    if(!name && !email && !id) {
+      res.status(418).send({ message: "You are missing required variables!!"});
     } else {
-      const newUser = await pool.query("INSERT INTO dummyData (first_name, last_name) VALUES ($1, $2) RETURNING *",
-      [first_name, last_name]);
+      //const newUser = await pool.query("INSERT INTO dummyData (first_name, last_name) VALUES ($1, $2) RETURNING *",
+      //[first_name, last_name]);
 
-      res.json(newUser.rows[0]);
+      const newUser = await pool.query("INSERT INTO users (id, name, email) VALUES ($1, $2, $3) RETURNING *",
+      [id, name, email]);
+
+      const newProf = await pool.query("INSERT INTO profile (id, class, major, sport, city, state, image, socials) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
+      [id, class1, major, sport, city, state, image, socials]);
+
+      res.send("User created");
+
     }
 
-    
   }catch (err) {
     console.error(err.message);
   }
 });
 
 
-//update a user's first_name
+//update a user's first_name based on knowing their user id
 app.put("/updateUser/:id", async(req, res) => {
   try{
     var data = req.body;
 
-    const user_id = req.params.id; //user to change
+    const id = req.params.id; //user to change
     //console.log(user_id);
-    const newName = data.newName; //value to change to
+    const name = data.name; //value to change to
+    const email = data.email;
+    const class1 = data.class;
+    const major = data.major;
+    const sport = data.sport;
+    const city = data.city;
+    const state = data.state;
+    const image = data.image;
+    const socials = data.socials;
+
     //console.log(newName);
 
-    const updateUser = await pool.query(`UPDATE dummyData SET first_name = $1 WHERE user_id = $2 RETURNING *`,
-    [newName, user_id]); //the variables are reversed due to the structure of the sql statement
+    const updateUser = await pool.query(`UPDATE users SET name = $1, email = $2 WHERE id = $3 RETURNING *`,
+    [name, email, id]); //the variables are reversed due to the structure of the sql statement
 
-    res.json(updateUser.rows);
+    const updateProf = await pool.query(`UPDATE profile SET class = $1, major = $2, sport = $3, city = $4, state = $5, image = $6, socials = $7 WHERE id = $8 RETURNING *`,
+    [class1, major, sport, city, state, image, socials, id]);
+
+    res.json("User has been Upadated");
   }
   catch (err) {
     console.error(err.message);
   }
 });
 
+/* Not sure about ability to delete users yet
 //delete a user
 app.delete("/deleteUser/:id", async(req, res) => {
   try{
@@ -103,5 +130,5 @@ app.delete("/deleteUser/:id", async(req, res) => {
   } catch(err) {
     console.error(err.message);
   }
-});
+});*/
 
