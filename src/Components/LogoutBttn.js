@@ -12,7 +12,7 @@ const LogoutBttn = () => {
     
         <div>
             <GoogleLogout
-                clientId="2872629209-8glte87ut0c6kgnse8fhfnu7h8ltehp8.apps.googleusercontent.com"
+                clientId="136092104401-1s09m7fo1f1gqr3hh333bnl7q6f4gc7d.apps.googleusercontent.com"
                 buttonText="Logout"
                 onLogoutSuccess={onSuccess}
             />

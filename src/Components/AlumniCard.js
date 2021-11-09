@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card'
 import { SocialIcon } from 'react-social-icons';
 
 const AlumniCard = (props) => {
-    console.log(props)
+    //console.log(props)
     props = props.alumni
     return(
         <Card className="alumni-card">

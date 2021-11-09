@@ -14,6 +14,7 @@ app.listen(process.env.PORT || 9000);
 //API start of work
 const pool = require("./db");
 app.use(express.json());
+const { authUser } = require('./authentication');
 
 //API Routes
 
@@ -35,11 +36,11 @@ app.get("/users", async(req, res) => {
 });
 
 //get a single User with their unique id
-app.get("/user/:id", async(req, res) => {
-  const { id } = req.params;
+app.get("/user/:findId", async(req, res) => {
+  const { findId } = req.params;
   try {
     const user = await pool.query("SELECT * FROM users JOIN profile USING (id) WHERE id = $1",
-    [id]);
+    [findId]);
 
     res.json(user.rows[0]);
   }
@@ -49,7 +50,7 @@ app.get("/user/:id", async(req, res) => {
 });
 
 //create a new user
-app.post("/createUser", async(req, res) => {
+app.post("/createUser", authUser, async(req, res) => {
   try {
     //console.log(req.body);
     var data = req.body;
@@ -89,11 +90,11 @@ app.post("/createUser", async(req, res) => {
 
 
 //update a user's first_name based on knowing their user id
-app.put("/updateUser/:id", async(req, res) => {
+app.put("/updateUser/:userId", authUser, async(req, res) => {
   try{
     var data = req.body;
 
-    const id = req.params.id; //user to change
+    const userId = req.params.userId; //user to change
     //console.log(user_id);
     const name = data.name; //value to change to
     const email = data.email;
@@ -108,10 +109,10 @@ app.put("/updateUser/:id", async(req, res) => {
     //console.log(newName);
 
     const updateUser = await pool.query(`UPDATE users SET name = $1, email = $2 WHERE id = $3 RETURNING *`,
-    [name, email, id]); //the variables are reversed due to the structure of the sql statement
+    [name, email, userId]); //the variables are reversed due to the structure of the sql statement
 
     const updateProf = await pool.query(`UPDATE profile SET class = $1, major = $2, sport = $3, city = $4, state = $5, image = $6, socials = $7 WHERE id = $8 RETURNING *`,
-    [class1, major, sport, city, state, image, socials, id]);
+    [class1, major, sport, city, state, image, socials, userId]);
 
     res.json("User has been Upadated");
   }
