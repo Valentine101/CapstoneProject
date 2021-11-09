@@ -17,12 +17,16 @@ app.use(express.json());
 
 //API Routes
 
-//get All users in dummyData table
-app.get("/allUsers", async(req, res) => {
+//get All truples in users and profile table JOINED together
+//paginated results as well
+//localhost:9000/users?page=3&size=4
+app.get("/users", async(req, res) => {
   try{
-    const allUsers = await pool.query("SELECT * FROM users JOIN profile USING (id)");
+    const { page, size } = req.query;
+    const users = await pool.query("SELECT * FROM users JOIN profile USING (id) LIMIT $2 OFFSET (($1 -1)*$2)",
+    [page, size]);
 
-    res.json(allUsers.rows);
+    res.json(users.rows);
   } 
   catch (err) {
     console.error(err.message);

@@ -10,7 +10,9 @@ const AlumniCardGroup = () => {
     const [alumniData, setAlumniData] = useState([])
 
 
-    fetch('http://localhost:9000/allUsers')
+    //http://localhost:9000/users?page=3&size=2
+    //would return the 5th and 6th result from the sql query
+    fetch('http://localhost:9000/users')
         .then(res => res.json())
         // .then(data => obj = data)
         .then(data => setAlumniData(data))
