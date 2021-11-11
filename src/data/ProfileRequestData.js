@@ -19,7 +19,6 @@ const ProfileRequestData = [
         email: "bird@gmail.com",
         class: 2019,
         sport: "Basketball",
-        image: "images/profile-photo-1.jpeg",
         city: "Atlanta",
         state: "GA",
         major: "Business",
