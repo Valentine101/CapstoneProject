@@ -30,13 +30,17 @@ const userById = (req, res) => {
     });
 };
 
+//filter based on queried varaibles
+//sql injection is possible
 const filter = (req, res) => {
-    /*const { page, size } = req.query;
-    pool.query(queries.filter, [page, size], (error, results) => {
+    const { name, sport, major, afterClass, beforeClass, state } = req.query;
+    const q = queries.filter(name, sport, major, afterClass, beforeClass, state);
+    console.log(q);
+    pool.query(q, (error, results) => {
           if(error) throw error;
           res.status(200).json(results.rows);
-    });*/
-    console.log(queries.filter(null, "football", null, "200", null, null));
+    });
+    //console.log(queries.filter(name, sport, major, afterClass, beforeClass, state));
 };
 
 //create a new user row and profile row

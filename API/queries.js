@@ -12,12 +12,14 @@ const updateUser = "UPDATE users SET name = $1, email = $2 WHERE id = $3 RETURNI
 const updateProf = "UPDATE profile SET class = $1, major = $2, sport = $3, city = $4, state = $5, image = $6, socials = $7 WHERE id = $8 RETURNING *";
 
 
-
+//The commented out lines are lines which utilize temp variables.
+//they are meant to stop sql injection, however they do not appear to work well in this instance
 function filter(name, sport, major, afterClass, beforeClass, state) {
     var conditions = "";
 
     if (name) {
         conditions += " (name ILIKE '%" + name + "%') ";
+        //conditions += " (name ILIKE '%$1%') ";
     }
 
     if (sport) {
@@ -25,6 +27,7 @@ function filter(name, sport, major, afterClass, beforeClass, state) {
             conditions += " AND ";
         }
         conditions += "('" + sport + "' = ANY(sport) )";
+        //conditions += "('$2' = ANY(sport) )";
     }
 
     if (major) {
@@ -33,6 +36,7 @@ function filter(name, sport, major, afterClass, beforeClass, state) {
         }
 
         conditions += "('" + major + "' = ANY(major) )";
+        //conditions += "('$3' = ANY(major) )";
     }
 
     if (afterClass) {
@@ -41,6 +45,7 @@ function filter(name, sport, major, afterClass, beforeClass, state) {
         }
 
         conditions += "( class > '" + afterClass + "' )";
+        //conditions += "( class > '$4' )";
     }
 
     if (beforeClass) {
@@ -49,6 +54,7 @@ function filter(name, sport, major, afterClass, beforeClass, state) {
         }
 
         conditions += "( class < '" + beforeClass + "' )";
+        //conditions += "( class < '$5' )";
     }
 
     if (state) {
@@ -57,6 +63,7 @@ function filter(name, sport, major, afterClass, beforeClass, state) {
         }
 
         conditions += "( state = '" + state + "' )";
+        //conditions += "( state = '$6' )";
     }
 
 
