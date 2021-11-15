@@ -4,8 +4,7 @@ import Container from 'react-bootstrap/Container'
 import Nav from 'react-bootstrap/Nav'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import Badge from 'react-bootstrap/Badge';
-import LoginBttn from './LoginBttn'
-import LogoutBttn from './LogoutBttn'
+import Login from './Login'
 import FilterModal from './FilterModal'
 import AlumniFormModal from './AlumniFormModal';
 import { PageContext } from '../data/PageContext';
@@ -34,8 +33,7 @@ const Header = () => {
                     </NavDropdown>
                 </Nav>
                 </Navbar.Collapse>
-                <LoginBttn/>
-                <LogoutBttn/>
+                <Login/>
             </Container>
         </Navbar>
     )
