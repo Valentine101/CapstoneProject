@@ -23,6 +23,7 @@ const Header = () => {
                     <Nav.Link onClick={() => {setPage("home")}}>Home</Nav.Link>
                     <FilterModal/>
                     <AlumniFormModal/>
+                    <Nav.Link href="https://gseagles.com/calendar" target="_blank">Calendar</Nav.Link>
                     <NavDropdown title="Admin">
                         <NavDropdown.Item onClick={() => {setPage("profile requests")}}>
                             Profile Requests

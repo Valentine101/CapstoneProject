@@ -37,7 +37,7 @@ const AlumniCardGroup = () => {
         )
     }
     return (
-        <Row>
+        <Row style={{WebkitJustifyContent: "center"}}>
             {filterCards(alumniData).map((alumni,index) =>
                 <AlumniCard key={"alumni"+index} alumni={alumni}/>
             )}

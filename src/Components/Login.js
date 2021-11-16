@@ -7,12 +7,10 @@ function Login() {
 
 
     const [showloginButton, setShowloginButton] = useState(true);
-    const [showlogoutButton, setShowlogoutButton] = useState(false);
 
     const onLoginSuccess = (res) => {
         console.log('Login Success:', res.profileObj);
         setShowloginButton(false);
-        setShowlogoutButton(true);
     };
 
     const onLoginFailure = (res) => {
@@ -23,7 +21,6 @@ function Login() {
         alert("You have been logged out successfully");
         console.clear();
         setShowloginButton(true);
-        setShowlogoutButton(false);
     };
 
     return (
@@ -39,7 +36,7 @@ function Login() {
                     isSignedIn={true}
                 /> : null }
 
-            { showlogoutButton ?
+            { !showloginButton ?
                 <GoogleLogout
                     clientId={clientId}
                     buttonText="Logout"
