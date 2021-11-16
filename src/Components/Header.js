@@ -9,14 +9,16 @@ import FilterModal from './FilterModal'
 import AlumniFormModal from './AlumniFormModal';
 import { PageContext } from '../data/PageContext';
 import ProfileRequestData from '../data/ProfileRequestData';
+import Image from 'react-bootstrap/Image';
+import '../Styles/GSColors.css'
 
 const Header = () => {
     const [page, setPage] = useContext(PageContext)
 
     return (
-        <Navbar bg="light" expand="lg">
+        <Navbar className="gs-background-blue" expand="lg">
             <Container>
-                <Navbar.Brand onClick={() => {setPage("home")}}>Soaring Eagles</Navbar.Brand>
+                <Image src={'images/gs-logo.png'} width={'70'}onClick={() => {setPage("home")}}/>
                 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                 <Navbar.Collapse>
                 <Nav>
