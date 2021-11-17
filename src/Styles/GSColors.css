@@ -25,3 +25,6 @@
     color: var(--gs-gold)
 }
 
+.navbar-light .navbar-nav .nav-link.active {
+    color: white
+}

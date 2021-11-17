@@ -3,7 +3,7 @@ import AlumniCard from './AlumniCard';
 import Row from 'react-bootstrap/Row'
 import alumniData from '../data/AlumniData';
 import { FilterContext } from '../data/FilterContext';
-
+import '../Styles/AlumniCardGroup.css';
 
 const AlumniCardGroup = () => {
     const [filter] = useContext(FilterContext)
@@ -37,7 +37,7 @@ const AlumniCardGroup = () => {
         )
     }
     return (
-        <Row style={{paddingLeft: "2.5em"}}>
+        <Row className="alumni-card-group">
             {filterCards(alumniData).map((alumni,index) =>
                 <AlumniCard key={"alumni"+index} alumni={alumni}/>
             )}
