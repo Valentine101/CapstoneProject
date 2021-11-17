@@ -12,7 +12,7 @@ const Body = () => {
     switch (page) {
         case "home":
             return (
-                <div>
+                <div style={{backgroundColor: "grey"}}>
                     <FilterPills/>
                     <AlumniCardGroup/>
                 </div>

@@ -4,28 +4,26 @@ import Container from 'react-bootstrap/Container'
 import Nav from 'react-bootstrap/Nav'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import Badge from 'react-bootstrap/Badge';
-import Login from './Login'
+import LoginBttn from './LoginBttn'
+import LogoutBttn from './LogoutBttn'
 import FilterModal from './FilterModal'
 import AlumniFormModal from './AlumniFormModal';
 import { PageContext } from '../data/PageContext';
 import ProfileRequestData from '../data/ProfileRequestData';
-import Image from 'react-bootstrap/Image';
-import '../Styles/GSColors.css'
 
 const Header = () => {
     const [page, setPage] = useContext(PageContext)
 
     return (
-        <Navbar className="gs-background-blue" expand="lg">
+        <Navbar bg="light" expand="lg">
             <Container>
-                <Image src={'images/gs-logo.png'} width={'70'}onClick={() => {setPage("home")}}/>
+                <Navbar.Brand onClick={() => {setPage("home")}}>Soaring Eagles</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                 <Navbar.Collapse>
                 <Nav>
                     <Nav.Link onClick={() => {setPage("home")}}>Home</Nav.Link>
                     <FilterModal/>
                     <AlumniFormModal/>
-                    <Nav.Link href="https://gseagles.com/calendar" target="_blank">Calendar</Nav.Link>
                     <NavDropdown title="Admin">
                         <NavDropdown.Item onClick={() => {setPage("profile requests")}}>
                             Profile Requests
@@ -36,7 +34,8 @@ const Header = () => {
                     </NavDropdown>
                 </Nav>
                 </Navbar.Collapse>
-                <Login/>
+                <LoginBttn/>
+                <LogoutBttn/>
             </Container>
         </Navbar>
     )
