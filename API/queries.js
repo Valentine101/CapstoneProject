@@ -3,7 +3,7 @@ const getUsers = "SELECT * FROM users";
 
 const join = "SELECT * FROM users JOIN profile USING (id)";
 const usersPag = join + " LIMIT $2 OFFSET (($1 -1)*$2)";
-const userById = join + " WHERE id = $1";
+const userById = join + " WHERE email = $1";
 
 const newUser = "INSERT INTO users (id, name, email) VALUES ($1, $2, $3) RETURNING *";
 const newProf = "INSERT INTO profile (id, class, major, sport, city, state, image, socials) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *";

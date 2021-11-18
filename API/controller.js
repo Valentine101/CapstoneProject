@@ -22,12 +22,13 @@ const usersPag = (req, res) => {
       });
 };
 
-//get a single User with their unique id
-const userById = (req, res) => {
-    const { findId } = req.params;
-    pool.query(queries.userById, [findId], (error, results) => {
+//get a single User with their email
+const userByEmail = (req, res) => {
+    const { email } = req.body;
+    pool.query(queries.userById, [email], (error, results) => {
         if(error) throw error;
-        res.status(200).json(results.rows[0]);
+        //console.log(results.rows);
+        res.status(200).send(results.rows[0]);
     });
 };
 
@@ -105,7 +106,7 @@ const uploadImage = (req, res) => {
 module.exports = {
     getUsers,
     usersPag,
-    userById,
+    userByEmail,
     createUser,
     updateUser,
     filter,

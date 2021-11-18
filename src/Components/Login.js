@@ -11,6 +11,21 @@ function Login() {
     const onLoginSuccess = (res) => {
         console.log('Login Success:', res.profileObj);
         setShowloginButton(false);
+
+
+        const userEmail = res.profileObj.email;
+        const requestBody = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({'email': userEmail})
+        };
+        
+        fetch('http://localhost:9000/user', requestBody)
+            .then(res => res.json())
+            // .then(data => obj = data)
+            //.then(data => setAlumniData(data))
+            .then(data => console.log(data))
+
     };
 
     const onLoginFailure = (res) => {
