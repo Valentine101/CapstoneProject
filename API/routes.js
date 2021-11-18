@@ -10,6 +10,7 @@ router.get('/user/:findId', controller.userById);
 router.get('/filter', controller.filter);
 
 router.post('/createUser', controller.createUser);
+router.post('/uploadImage', controller.uploadImage);
 
 router.put('/updateUser/:userId', controller.updateUser);
 

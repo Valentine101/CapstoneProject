@@ -1,5 +1,6 @@
 const pool = require("../db");
 const queries = require('./queries');
+//var cloudinary = require('../cloud');
 
 //example code, not really meant to be utilized
 const getUsers = (req, res) => {
@@ -71,6 +72,35 @@ const updateUser = (req, res) => {
     res.send("User has been updated");
 };
 
+//necessary info that does not work when imported.
+const cloudinary = require('cloudinary').v2;
+cloudinary.config({ 
+    cloud_name: 'dbiwojvjn', 
+    api_key: '464683317646295', 
+    api_secret: '7VR1Wr6gNUxr3WmIoTmvcr_AAlw' 
+});
+
+
+const uploadImage = (req, res) => {
+    const file = req.files.photo;
+    //console.log(file);
+
+    cloudinary.uploader.upload(file.tempFilePath, {
+        folder: 'userImages',
+        height: 275,
+        width: 275,
+        gravity: 'face',
+        crop: "thumb"
+    }, function(error, result) {
+        //console.log("Error: ", err);
+        //console.log("Result: ", result);
+        if(error) throw error;
+        res.send({
+            success: true,
+            result
+        });
+    });
+}
 
 module.exports = {
     getUsers,
@@ -79,4 +109,5 @@ module.exports = {
     createUser,
     updateUser,
     filter,
+    uploadImage,
 };
