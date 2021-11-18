@@ -1,5 +1,6 @@
 // This is made up data. This should be deleted once a database is made
 
+/*
 const alumniData = [
     {
         name: "Michael Jordan",
@@ -102,6 +103,6 @@ const alumniData = [
 
         ]
     }
-]
+]*/
 
-export default alumniData
+//export default alumniData
