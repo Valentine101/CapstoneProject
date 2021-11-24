@@ -17,6 +17,10 @@ const updateProf = "UPDATE profile SET class = $1, major = $2, sport = $3, city 
 function filter(name, sport, major, afterClass, beforeClass, state) {
     var conditions = "";
 
+    if(!(name || sport || major|| afterClass|| beforeClass|| state)) {
+        return join;
+    }
+
     if (name) {
         conditions += " (name ILIKE '%" + name + "%') ";
         //conditions += " (name ILIKE '%$1%') ";
