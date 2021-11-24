@@ -1,32 +1,10 @@
-export const getAlumniData = function() {
-    return new Promise((resolve, reject) => {
-        fetch('http://localhost:9000/users')
-            .then(res => res.json())
-            .then(data => resolve(data))
-    })
-}
-
-export const getFilterData = function(name, sport, major, afterClass, beforeClass, state) {
+const getUserData = function(filter) {
     return new Promise((resolve, reject) => {
         var url = "http://localhost:9000/filter?";
 
-        if (name) {
-            url += "name=" + name +"&";
-        }
-        if (sport) {
-            url += "sport=" + sport + "&";
-        }
-        if (major) {
-            url += "major=" + major +"&";
-        }
-        if (afterClass) {
-            url += "afterClass=" + afterClass + "&";
-        }
-        if (beforeClass) {
-            url += "beforeClass=" + beforeClass +"&";
-        }
-        if (state) {
-            url += "state=" + state + "&";
+        for(const x in filter) {
+            url += x+"="
+            url += filter[x]+"&"
         }
 
         fetch(url)
@@ -34,3 +12,5 @@ export const getFilterData = function(name, sport, major, afterClass, beforeClas
             .then(data => resolve(data))
     })
 }
+
+export default getUserData

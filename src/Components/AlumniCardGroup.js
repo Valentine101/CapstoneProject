@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import AlumniCard from './AlumniCard';
 import Row from 'react-bootstrap/Row'
-import getAlumniData from '../data/AlumniData';
+import getUserData from '../data/AlumniData';
 import { FilterContext } from '../data/FilterContext';
 import '../Styles/AlumniCardGroup.css';
 
@@ -10,8 +10,8 @@ const AlumniCardGroup = () => {
     const [filter] = useContext(FilterContext)
 
     useEffect(() =>  {
-        getAlumniData().then(data => setAlumniData(data))
-    }, [])
+        getUserData(filter).then(data => setAlumniData(data))
+    }, [filter])
     
     function filterCards(alumni) {
         
