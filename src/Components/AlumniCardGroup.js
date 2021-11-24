@@ -1,25 +1,18 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import AlumniCard from './AlumniCard';
 import Row from 'react-bootstrap/Row'
-//import alumniData from '../data/AlumniData';
+import getAlumniData from '../data/AlumniData';
 import { FilterContext } from '../data/FilterContext';
 import '../Styles/AlumniCardGroup.css';
 
 const AlumniCardGroup = () => {
+    const [alumniData, setAlumniData] = useState([])
     const [filter] = useContext(FilterContext)
 
-    const [alumniData, setAlumniData] = useState([])
-
-
-    //http://localhost:9000/users?page=3&size=2
-    //would return the 5th and 6th result from the sql query
-    fetch('http://localhost:9000/users')
-        .then(res => res.json())
-        // .then(data => obj = data)
-        .then(data => setAlumniData(data))
-        // .then(() => alumniData = obj)*/
-
-    /*
+    useEffect(() =>  {
+        getAlumniData().then(data => setAlumniData(data))
+    }, [])
+    
     function filterCards(alumni) {
         
         function filterString(x) {
@@ -30,7 +23,20 @@ const AlumniCardGroup = () => {
         filteredAlumni = filterString("name")
         filteredAlumni = filterString("major")
         filteredAlumni = filterString("state")
-        filteredAlumni = filterString("sport")
+        // filteredAlumni = filterString("sport")
+
+        filteredAlumni = filteredAlumni.filter(person => {
+            if(person instanceof Array) {
+                person.forEach(sport => {
+                    if(sport.toLowerCase().includes(filter['sport'].toLowerCase())) {
+                        return person
+                    }
+                });
+            }
+            else {
+                person['sport'].toLowerCase().includes(filter['sport'].toLowerCase())
+            }
+        })
 
         if(filter.classAfter !== ""){
             filteredAlumni = filteredAlumni.filter(person => person.class >= parseInt(filter.classAfter))
@@ -41,13 +47,13 @@ const AlumniCardGroup = () => {
 
         return filteredAlumni
     }
-    if(filterCards(alumniData).length === 0){
+    if(alumniData.length === 0){
         return (
             <div style={{fontSize: "50px", textAlign: "center"}}>
                 No Results
             </div>
         )
-    }*/
+    }
     return (
         <Row className="alumni-card-group">
             {(alumniData).map((alumni,index) =>
