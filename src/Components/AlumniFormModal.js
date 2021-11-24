@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Button  from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -8,8 +8,10 @@ import Col from 'react-bootstrap/Col';
 import SportData from '../data/SportData';
 import MajorData from '../data/MajorData';
 import StateData from '../data/StateData';
+import { UserContext } from '../data/UserContext';
 
 const AlumniFormModal = (props) => {
+    const [user] = useContext(UserContext)
     const [validated, setValidated] = useState(false)
     const [show,setShow] = useState(false)
 
@@ -19,7 +21,12 @@ const AlumniFormModal = (props) => {
     }
     const open = () => setShow(true)
 
-    const [socials, setSocials]= useState([{social: ""}])
+    const [socials, setSocials]= useState(
+        user.socials ? user.socials.map(social => {
+            return {social: social}
+        }) 
+        : [{social: ""}]
+    )
     
     const addSocialRow = () => {
         if(socials.length < 8) {
@@ -115,10 +122,10 @@ const AlumniFormModal = (props) => {
 
     return(
         <>
-            <Nav.Link onClick={open}>Create Profile</Nav.Link>
+            <Nav.Link onClick={open}>{user.name ? 'Edit Profile' : 'Create Profile'}</Nav.Link>
             <Modal show={show} onHide={close} scrollable size="lg">
                 <Modal.Header closeButton>
-                    <Modal.Title>Create Profile</Modal.Title>
+                    <Modal.Title>{user.name ? 'Edit Profile' : 'Create Profile'}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form noValidate onSubmit={handleSubmit} validated={validated}>
@@ -126,7 +133,7 @@ const AlumniFormModal = (props) => {
                             <RequiredLabel label="Name"/>
                             <Form.Control 
                                 required
-                                defaultValue={inputs.name}
+                                defaultValue={inputs.name || user.name}
                                 placeholder='Name'
                                 name='name'
                                 onChange={handleChange}
@@ -138,7 +145,7 @@ const AlumniFormModal = (props) => {
                         <Form.Group className="mb-3">
                             <RequiredLabel label="Email"/>
                             <Form.Control
-                                defaultValue={inputs.email}
+                                defaultValue={inputs.email || user.email}
                                 placeholder='Email'
                                 name='email'
                                 onChange={handleChange}
@@ -180,7 +187,7 @@ const AlumniFormModal = (props) => {
                         <Form.Group className="mb-3">
                             <RequiredLabel label="Major"/>
                             <Form.Select
-                                defaultValue={inputs.major} 
+                                defaultValue={inputs.major || user.major} 
                                 name="major" 
                                 onChange={handleChange}
                                 required
@@ -199,7 +206,7 @@ const AlumniFormModal = (props) => {
                                 <Col sm={9}>
                                     <RequiredLabel label="City"/>
                                     <Form.Control
-                                        defaultValue={inputs.city} 
+                                        defaultValue={inputs.city || user.city} 
                                         placeholder='City'
                                         name='city'
                                         onChange={handleChange}
@@ -212,7 +219,7 @@ const AlumniFormModal = (props) => {
                                 <Col sm={3}>
                                     <RequiredLabel label="State"/>
                                     <Form.Select
-                                        defaultValue={inputs.state} 
+                                        defaultValue={inputs.state || user.state} 
                                         name="state" 
                                         onChange={handleChange}
                                         required
