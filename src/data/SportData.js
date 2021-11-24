@@ -4,7 +4,8 @@ const SportData = [
     "Football",
     "Basketball",
     "Baseball",
-    "Swimming"
+    "Swimming",
+    "Soccer"
 ]
 
 export default SportData
