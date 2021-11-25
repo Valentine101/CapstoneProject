@@ -45,6 +45,14 @@ const filter = (req, res) => {
     //console.log(queries.filter(name, sport, major, afterClass, beforeClass, state));
 };
 
+//admin's usage of getting unconfirmed users
+const unconfirmed = (req, res) => {
+    pool.query(queries.unconfirmed, (error, results) => {
+        if(error) throw error;
+        res.status(200).json(results.rows);
+  });
+};
+
 //create a new user row and profile row
 const createUser = async(req, res) => {
     
@@ -71,6 +79,17 @@ const updateUser = (req, res) => {
     });
 
     res.send("User has been updated");
+};
+
+//method to update isConfirmed db attribute to true once admin approves user
+const updateUnconfirmed = (req, res) => {
+    const { email } = req.body;
+
+    pool.query(queries.updateUnconfirmed, [email], (error, results) => {
+        if(error) throw error;
+    });
+
+    res.send("User is now approved/confirmed");
 };
 
 //necessary info that does not work when imported.
@@ -107,8 +126,10 @@ module.exports = {
     getUsers,
     usersPag,
     userByEmail,
+    unconfirmed,
     createUser,
     updateUser,
+    updateUnconfirmed,
     filter,
     uploadImage,
 };
