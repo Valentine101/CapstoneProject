@@ -65,11 +65,18 @@ const createUser = async(req, res) => {
         const id = results.rows[0].id;
         console.log(id);
 
-        pool.query(queries.newProf, [id, year, major, sport, city, state, image, socials]);
+        pool.query(queries.newProf, [id, year, major, sport, city, state, image, socials], (error, results2) => {
+            //if(error) throw error;
+
+            const resultsTemp = results.rows[0];
+            const results2Temp = results2.rows[0];
+
+            const temp = {resultsTemp, results2Temp};
+            res.send(temp);
+        });
 
     });
     
-    res.send("User created");
 };
 
 //update a user's first_name based on knowing their user id
