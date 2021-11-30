@@ -56,12 +56,19 @@ const unconfirmed = (req, res) => {
 //create a new user row and profile row
 const createUser = async(req, res) => {
     
-    const { id, name, email, year, major, sport, city, state, image, socials } = req.body;
+    const { name, email, year, major, sport, city, state, image, socials } = req.body;
 
     //the moment u try to error trap. it all fails... but if u dont error trap... then it works great. makes no sense
-    await pool.query(queries.newUser, [id, name, email]);
-    await pool.query(queries.newProf, [id, year, major, sport, city, state, image, socials]);
+    pool.query(queries.newUser, [name, email], (error, results) => {
+        if(error) throw error;
+        
+        const id = results.rows[0].id;
+        console.log(id);
 
+        pool.query(queries.newProf, [id, year, major, sport, city, state, image, socials]);
+
+    });
+    
     res.send("User created");
 };
 

@@ -5,7 +5,7 @@ const join = 'SELECT * FROM users JOIN profile USING (id) WHERE ("isConfirmed"=t
 const usersPag = join + " LIMIT $2 OFFSET (($1 -1)*$2)";
 const userById = join + " AND email = $1";
 
-const newUser = "INSERT INTO users (id, name, email) VALUES ($1, $2, $3) RETURNING *";
+const newUser = "INSERT INTO users (name, email) VALUES ($1, $2) RETURNING *";
 const newProf = "INSERT INTO profile (id, class, major, sport, city, state, image, socials) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *";
 
 const updateUser = "UPDATE users SET name = $1, email = $2 WHERE id = $3 RETURNING *";
@@ -74,7 +74,7 @@ function filter(name, sport, major, afterClass, beforeClass, state) {
     }
 
 
-    var conditions = join + " WHERE (" + conditions + ")";
+    var conditions = join + " AND (" + conditions + ")";
 
     return conditions;
 }
