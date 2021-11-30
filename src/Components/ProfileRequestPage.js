@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import ProfileRequestData from '../data/ProfileRequestData';
+import React, { useState, useEffect } from 'react'
+import getProfileRequestData from '../data/ProfileRequestData';
 import Table from 'react-bootstrap/Table'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
@@ -14,9 +14,22 @@ const ProfileRequestPage = () => {
     const close = () => setShow(false)
 
     const [selectedProfile, setSelectedProfile] = useState({})
+    const [requestData, setRequestData] = useState([])
+    
+    useEffect(() =>  {
+        getProfileRequestData().then(data => setRequestData(data))
+    }, [])
+
 
     const approveUser = () => {
-        console.log(selectedProfile.name+" was approved")
+        const requestBody = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                email: selectedProfile.email
+            })
+        }
+        fetch('http://localhost:9000/updateUnconfirmed', requestBody)
     }
 
     const denyUser = () => {
@@ -36,7 +49,7 @@ const ProfileRequestPage = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {ProfileRequestData.map((profile,index) => 
+                    {requestData.map((profile,index) => 
                         <tr key={"profile"+index} onClick={() => {open(); setSelectedProfile(profile)}}>
                             <td>{profile.name}</td>
                             <td>{profile.email}</td>
@@ -58,8 +71,8 @@ const ProfileRequestPage = () => {
                     <ProfileReviewModalRow parameter="Major" value={selectedProfile.major}/>
                     <ProfileReviewModalRow parameter="Sport" value={selectedProfile.sport}/>
                     <ProfileReviewModalRow parameter="Loaction" value={selectedProfile.city+", "+selectedProfile.state}/>
-                    {selectedProfile.medias && <h3>Social Links</h3>}
-                    {selectedProfile.medias && selectedProfile.medias.map((media, index) =>
+                    {selectedProfile.socials && <h3>Social Links</h3>}
+                    {selectedProfile.socials && selectedProfile.socials.map((media, index) =>
                         <Row key={"media"+index}>
                             <Col sm={2}>
                                 <SocialIcon url={media}/>
