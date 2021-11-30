@@ -61,6 +61,7 @@ const AlumniFormModal = (props) => {
     }    
 
     const handleSubmit = (event) => {
+        event.preventDefault()
         const form = event.currentTarget;
         if (form.checkValidity()) {
             close()
@@ -70,49 +71,41 @@ const AlumniFormModal = (props) => {
                     medias.push(inputs[x])
                 }
             }
-            // TODO: update profile request db table
-            console.log({
-                name: inputs.name,
-                class: inputs.class,
-                sport: inputs.sport,
-                // image does not do anything right now
-                // image: "",
-                city: inputs.city,
-                state: inputs.state,
-                major: inputs.major,
-                medias: medias
-            })
 
             //fetch call localhost:9000/createUser
-            /*
+            console.log(inputs.name)
+
+            // Make postgres happy
+            const majorArray = "{"+inputs.major+"}"
+            const sportArray = "{"+inputs.sport+"}"
+            const mediasArray= "{"+medias+"}"
+
             const requestBody = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    "googleId" : ,
-                    "id" : ,
-                    "name" : ,
-                    "email" : ,
-                    "year" : ,
-                    "major" : {},
-                    "sport" : {},
-                    "city" : ,
-                    "state" : ,
-                    "image" : ,
-                    "socials" : {}
+                    "name" : inputs.name,
+                    "email" : inputs.email,
+                    "year" : inputs.class,
+                    "major" : majorArray,
+                    "sport" : sportArray,
+                    "city" : inputs.city,
+                    "state" : inputs.state,
+                    // "image" : ,
+                    "socials" : mediasArray
                 })
             };
+
+            if(user.name) {
+                fetch('http://localhost:9000/updateUser', requestBody)
+            }
+            else {
+                fetch('http://localhost:9000/createUser', requestBody)
+            }
             
-            fetch('http://localhost:9000/createUser', requestBody)
-                .then(res => res.json())
-                // .then(data => obj = data)
-                //.then(data => setAlumniData(data))
-                .then(data => console.log(data))
-            */
 
             return
         }
-        event.preventDefault();
         event.stopPropagation();
         setValidated(true);
 
@@ -156,6 +149,19 @@ const AlumniFormModal = (props) => {
                             </Form.Control.Feedback>
                         </Form.Group>
                         <Form.Group className="mb-3">
+                            <RequiredLabel label="Class"/>
+                            <Form.Control
+                                defaultValue={inputs.class || user.class}
+                                placeholder='Class'
+                                name='class'
+                                onChange={handleChange}
+                                required
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                Please Enter a Graduating Class
+                            </Form.Control.Feedback>
+                        </Form.Group>
+                        {/* <Form.Group className="mb-3">
                             <RequiredLabel label="Photo"/>
                             <Form.Control
                                 name="photo"
@@ -166,7 +172,7 @@ const AlumniFormModal = (props) => {
                             <Form.Control.Feedback type="invalid">
                                 Please Upload a Photo
                             </Form.Control.Feedback>
-                        </Form.Group>
+                        </Form.Group> */}
                         <Form.Group className="mb-3">
                             <RequiredLabel label="Sport"/>
                             <Form.Select
