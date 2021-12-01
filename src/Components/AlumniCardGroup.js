@@ -13,40 +13,6 @@ const AlumniCardGroup = () => {
         getUserData(filter).then(data => setAlumniData(data))
     }, [filter])
     
-    function filterCards(alumni) {
-        
-        function filterString(x) {
-            return filteredAlumni.filter(person => person[x].toLowerCase().includes(filter[x].toLowerCase()))
-        }
-        var filteredAlumni = alumni
-
-        filteredAlumni = filterString("name")
-        filteredAlumni = filterString("major")
-        filteredAlumni = filterString("state")
-        // filteredAlumni = filterString("sport")
-
-        filteredAlumni = filteredAlumni.filter(person => {
-            if(person instanceof Array) {
-                person.forEach(sport => {
-                    if(sport.toLowerCase().includes(filter['sport'].toLowerCase())) {
-                        return person
-                    }
-                });
-            }
-            else {
-                person['sport'].toLowerCase().includes(filter['sport'].toLowerCase())
-            }
-        })
-
-        if(filter.classAfter !== ""){
-            filteredAlumni = filteredAlumni.filter(person => person.class >= parseInt(filter.classAfter))
-        }
-        if(filter.classBefore !== "") {
-            filteredAlumni = filteredAlumni.filter(person => person.class <= parseInt(filter.classBefore))            
-        }
-
-        return filteredAlumni
-    }
     if(alumniData.length === 0){
         return (
             <div style={{fontSize: "50px", textAlign: "center"}}>
