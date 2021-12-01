@@ -8,12 +8,17 @@ const userById = join + " AND email = $1";
 const newUser = "INSERT INTO users (name, email) VALUES ($1, $2) RETURNING *";
 const newProf = "INSERT INTO profile (id, class, major, sport, city, state, image, socials) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *";
 
-const updateUser = "UPDATE users SET name = $1, email = $2 WHERE id = $3 RETURNING *";
+const updateUser = "UPDATE users SET name = $1, email = $2, \"isConfirmed\"=false WHERE id = $3 RETURNING *";
 const updateProf = "UPDATE profile SET class = $1, major = $2, sport = $3, city = $4, state = $5, image = $6, socials = $7 WHERE id = $8 RETURNING *";
+
+const updateIsAdmin = 'UPDATE users SET "isAdmin" = NOT "isAdmin" WHERE email=$1';
 
 const unconfirmed = 'SELECT * FROM users JOIN profile USING (id) WHERE ("isConfirmed"=false)'
 
 const updateUnconfirmed = 'UPDATE users SET "isConfirmed"=true WHERE email=$1'
+
+const deleteUserTruple = 'DELETE FROM users WHERE email=$1 RETURNING *';
+const deleteProfileTruple = 'DELETE FROM profile WHERE id=$1';
 
 //The commented out lines are lines which utilize temp variables.
 //they are meant to stop sql injection, however they do not appear to work well in this instance
@@ -89,5 +94,8 @@ module.exports = {
     updateProf,
     unconfirmed,
     updateUnconfirmed,
+    deleteUserTruple,
+    deleteProfileTruple,
+    updateIsAdmin,
     filter,
 };

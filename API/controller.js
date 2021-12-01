@@ -106,6 +106,34 @@ const updateUnconfirmed = (req, res) => {
     res.send("User is now approved/confirmed");
 };
 
+const deleteUser = (req, res) => {
+    const { email } = req.body;
+
+    var id = 0;
+
+    pool.query(queries.deleteUserTruple, [email], (error, results) => {
+        if(error) throw error;
+        id = results.rows[0].id;
+        
+        pool.query(queries.deleteProfileTruple, [id], (error, results) => {
+            if(error) throw error;
+        });
+    });
+
+
+    res.send("User deleted");
+};
+
+const updateIsAdmin = (req, res) => {
+    const { email } = req.body;
+
+    pool.query(queries.updateIsAdmin, [email], (error, results) => {
+        if(error) throw error;
+    });
+
+    res.send("User isAdmin status has changed");
+};
+
 //necessary info that does not work when imported.
 const cloudinary = require('cloudinary').v2;
 cloudinary.config({ 
@@ -134,7 +162,7 @@ const uploadImage = (req, res) => {
             result
         });
     });
-}
+};
 
 module.exports = {
     getUsers,
@@ -146,4 +174,6 @@ module.exports = {
     updateUnconfirmed,
     filter,
     uploadImage,
+    deleteUser,
+    updateIsAdmin,
 };

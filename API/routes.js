@@ -18,4 +18,9 @@ router.post('/uploadImage', controller.uploadImage);
 router.put('/updateUser/:userId', controller.updateUser);
 router.put('/updateUnconfirmed', controller.updateUnconfirmed);
 
+//need to find a way for authentication middleware to verify they are an admin
+router.put('/updateIsAdmin', controller.updateIsAdmin);
+
+router.delete('/deleteUser', controller.deleteUser);
+
 module.exports = router;
