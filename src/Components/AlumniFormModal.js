@@ -94,7 +94,7 @@ const AlumniFormModal = (props) => {
                     "sport" : sportArray,
                     "city" : user.city || inputs.city,
                     "state" : user.state || inputs.state,
-                    // "image" : ,
+                    "image" : user.image,
                     "socials" : mediasArray
                 })
             };
