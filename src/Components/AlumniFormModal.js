@@ -65,39 +65,41 @@ const AlumniFormModal = (props) => {
         const form = event.currentTarget;
         if (form.checkValidity()) {
             close()
-            const medias = []
-            for(const x in inputs) {
-                if(x.includes("social")) {
-                    medias.push(inputs[x])
+            
+            var medias = []
+            if(user.medias) {
+                medias = user.media
+            }
+            else {
+                for(const x in inputs) {
+                    if(x.includes("social")) {
+                        medias.push(inputs[x])
+                    }
                 }
             }
-
-            //fetch call localhost:9000/createUser
-            console.log(inputs.name)
-
+            
             // Make postgres happy
             const majorArray = "{"+inputs.major+"}"
             const sportArray = "{"+inputs.sport+"}"
             const mediasArray= "{"+medias+"}"
 
             const requestBody = {
-                method: 'POST',
+                method: user.name ? 'PUT' : 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    "name" : inputs.name,
-                    "email" : inputs.email,
-                    "year" : inputs.class,
+                    "name" : user.name || inputs.name,
+                    "email" : user.email || inputs.email,
+                    "year" : user.class || inputs.class,
                     "major" : majorArray,
                     "sport" : sportArray,
-                    "city" : inputs.city,
-                    "state" : inputs.state,
+                    "city" : user.city || inputs.city,
+                    "state" : user.state || inputs.state,
                     // "image" : ,
                     "socials" : mediasArray
                 })
             };
-
             if(user.name) {
-                fetch('http://localhost:9000/updateUser', requestBody)
+                fetch('http://localhost:9000/updateUser/'+user.id, requestBody)
             }
             else {
                 fetch('http://localhost:9000/createUser', requestBody)
