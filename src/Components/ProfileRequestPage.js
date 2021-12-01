@@ -30,10 +30,21 @@ const ProfileRequestPage = () => {
             })
         }
         fetch('http://localhost:9000/updateUnconfirmed', requestBody)
+        
+        setRequestData(requestData.filter(request => request.email !== selectedProfile.email))
     }
 
     const denyUser = () => {
-        console.log(selectedProfile.name+" was denied")
+        const requestBody = {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                email: selectedProfile.email
+            })
+        }
+        fetch('http://localhost:9000/deleteUser', requestBody)
+        
+        setRequestData(requestData.filter(request => request.email !== selectedProfile.email))
     }
 
     return (
