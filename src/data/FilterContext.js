@@ -7,8 +7,8 @@ export const FilterProvider = props => {
         name: "",
         sport: "",
         major: "",
-        classBefore: "",
-        classAfter: "",
+        beforeClass: "",
+        afterClass: "",
         state: ""
     })
     

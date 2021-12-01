@@ -15,8 +15,8 @@ const FilterPill = (props) => {
     }
 
     var newFilter = undefined
-    if(props.filter === "classBefore") newFilter = "CLASS BEFORE"
-    if(props.filter === "classAfter") newFilter = "CLASS AFTER"
+    if(props.filter === "beforeClass") newFilter = "CLASS BEFORE"
+    if(props.filter === "afterClass") newFilter = "CLASS AFTER"
     
     return (
         <Badge pill bg="primary">

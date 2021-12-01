@@ -34,8 +34,8 @@ const FilterModal = () => {
         newFilter.name = inputs.name || filter.name
         newFilter.sport = inputs.sport || filter.sport
         newFilter.major = inputs.major || filter.major
-        newFilter.classBefore = inputs.classBefore || filter.classBefore
-        newFilter.classAfter = inputs.classAfter || filter.classAfter
+        newFilter.beforeClass = inputs.beforeClass || filter.beforeClass
+        newFilter.afterClass = inputs.afterClass || filter.afterClass
         newFilter.state = inputs.state || filter.state
         setInputs({})
         setFilter(newFilter)
@@ -75,7 +75,7 @@ const FilterModal = () => {
                         <Row>
                             <Col>
                                 <Form.Label>After</Form.Label>
-                                <Form.Select defaultValue={filter.classAfter} name="classAfter" onChange={handleChange}>
+                                <Form.Select defaultValue={filter.afterClass} name="afterClass" onChange={handleChange}>
                                     <option value={""}>Year</option>
                                     {classYears.map((year) =>
                                         <option value={year} key={year}>{year}</option>
@@ -83,7 +83,7 @@ const FilterModal = () => {
                                 </Form.Select>
                             </Col>
                             <Col>
-                                <Form.Label>Before</Form.Label>                                    <Form.Select defaultValue={filter.classBefore} name="classBefore" onChange={handleChange}>
+                                <Form.Label>Before</Form.Label>                                    <Form.Select defaultValue={filter.beforeClass} name="beforeClass" onChange={handleChange}>
                                     <option value={""}>Year</option>
                                     {classYears.map((year) =>
                                         <option value={year} key={year}>{year}</option>
