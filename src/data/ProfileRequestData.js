@@ -1,6 +1,6 @@
 const getProfileRequestData = function(filter) {
     return new Promise((resolve, reject) => {
-        const url = 'http://localhost:9000/unconfirmed'
+        const url = 'https://soaringeagles.herokuapp.com/unconfirmed'
         fetch(url)
             .then(res => res.json())
             .then(data => resolve(data))

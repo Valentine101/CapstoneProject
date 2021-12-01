@@ -25,7 +25,7 @@ const ManageProfilePage = () => {
                 email: selectedProfile.email
             })
         }
-        fetch('http://localhost:9000/deleteUser', requestBody)
+        fetch('https://soaringeagles.herokuapp.com/deleteUser', requestBody)
         
         setAlumniData(alumniData.filter(alumni => alumni.email !== selectedProfile.email))
     }
@@ -44,7 +44,7 @@ const ManageProfilePage = () => {
                 adAdmin: newAlumniData[index].isAdmin
             })
         }
-        fetch('http://localhost:9000/updateIsAdmin', requestBody)
+        fetch('https://soaringeagles.herokuapp.com/updateIsAdmin', requestBody)
     }
 
     useEffect(() =>  {

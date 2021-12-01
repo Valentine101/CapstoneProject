@@ -1,6 +1,6 @@
 const getUserData = function(filter) {
     return new Promise((resolve, reject) => {
-        var url = "http://localhost:9000/filter?";
+        var url = "https://soaringeagles.herokuapp.com/filter?";
 
         for(const x in filter) {
             url += x+"="

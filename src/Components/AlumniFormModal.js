@@ -99,10 +99,10 @@ const AlumniFormModal = (props) => {
                 })
             };
             if(user.name) {
-                fetch('http://localhost:9000/updateUser/'+user.id, requestBody)
+                fetch('https://soaringeagles.herokuapp.com/updateUser/'+user.id, requestBody)
             }
             else {
-                fetch('http://localhost:9000/createUser', requestBody)
+                fetch('https://soaringeagles.herokuapp.com/createUser', requestBody)
             }
             
 

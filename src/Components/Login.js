@@ -23,7 +23,7 @@ function Login() {
             body: JSON.stringify({'email': userEmail})
         };
         
-        fetch('http://localhost:9000/user', requestBody)
+        fetch('https://soaringeagles.herokuapp.com/user', requestBody)
             .then(res => res.json())
             .then(
                 (data) => {

@@ -13,7 +13,7 @@ const getUsers = (req, res) => {
 
 //get All truples in users and profile table JOINED together
 //paginated results as well
-//localhost:9000/users?page=3&size=4
+//soaringeagles.herokuapp.com/users?page=3&size=4
 const usersPag = (req, res) => {
       const { page, size } = req.query;
       pool.query(queries.usersPag, [page, size], (error, results) => {

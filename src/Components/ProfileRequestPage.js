@@ -29,7 +29,7 @@ const ProfileRequestPage = () => {
                 email: selectedProfile.email
             })
         }
-        fetch('http://localhost:9000/updateUnconfirmed', requestBody)
+        fetch('https://soaringeagles.herokuapp.com/updateUnconfirmed', requestBody)
         
         setRequestData(requestData.filter(request => request.email !== selectedProfile.email))
     }
@@ -42,7 +42,7 @@ const ProfileRequestPage = () => {
                 email: selectedProfile.email
             })
         }
-        fetch('http://localhost:9000/deleteUser', requestBody)
+        fetch('https://soaringeagles.herokuapp.com/deleteUser', requestBody)
         
         setRequestData(requestData.filter(request => request.email !== selectedProfile.email))
     }
