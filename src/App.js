@@ -12,8 +12,8 @@ const App = () => {
         <FilterProvider>
           <UserProvider>
             <Header/>
+            <Body/>  
           </UserProvider>
-          <Body/>  
         </FilterProvider>
       </PageProvider>
     </div>

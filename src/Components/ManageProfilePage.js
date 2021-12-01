@@ -1,20 +1,51 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import Table from 'react-bootstrap/Table'
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import getAlumniData from '../data/AlumniData';
-
+import { UserContext } from '../data/UserContext';
 
 const ManageProfilePage = () => {
     const [alumniData, setAlumniData] = useState([])
     const [selectedProfile, setSelectedProfile] = useState({})
+    const [user] = useContext(UserContext)
     
     const [show, setShow] = useState(false)
     const open = () => setShow(true)
     const close = () => setShow(false)
 
     const [checked, setChecked] = useState(false)
+
+    const deleteUser = () => {
+        const requestBody = {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                email: selectedProfile.email
+            })
+        }
+        fetch('http://localhost:9000/deleteUser', requestBody)
+        
+        setAlumniData(alumniData.filter(alumni => alumni.email !== selectedProfile.email))
+    }
+
+    const changeAdmin = () => {
+        const index = alumniData.findIndex(alumni => alumni.email === selectedProfile.email)
+        var newAlumniData = [...alumniData]
+        newAlumniData[index].isAdmin = !alumniData[index].isAdmin
+        setAlumniData(newAlumniData)
+
+        const requestBody = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                email: selectedProfile.email,
+                adAdmin: newAlumniData[index].isAdmin
+            })
+        }
+        fetch('http://localhost:9000/updateIsAdmin', requestBody)
+    }
 
     useEffect(() =>  {
         getAlumniData().then(data => setAlumniData(data))
@@ -56,11 +87,17 @@ const ManageProfilePage = () => {
                             className="mb-2"
                             label="Admin"
                             checked={checked}
+                            disabled={user.email === selectedProfile.email}
                             // Update db table onChange
-                            onChange={e => setChecked(e.currentTarget.checked)}
+                            onChange={e => {changeAdmin(); setChecked(e.currentTarget.checked)}}
                         />
                     </Form>
-                    <Button variant="danger">Delete Profile</Button>
+                    <Button 
+                        variant="danger" 
+                        disabled={user.email === selectedProfile.email} 
+                        onClick={() => {close(); deleteUser()}}>
+                        Delete Profile
+                    </Button>
                 </Modal.Body>
             </Modal>
         </>
