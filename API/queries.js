@@ -30,7 +30,7 @@ function filter(name, sport, major, afterClass, beforeClass, state) {
     }
 
     if (name) {
-        conditions += " AND (name ILIKE '%" + name + "%') ";
+        conditions += " (name ILIKE '%" + name + "%') ";
         //conditions += " (name ILIKE '%$1%') ";
     }
 
