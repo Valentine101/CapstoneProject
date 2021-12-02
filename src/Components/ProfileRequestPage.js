@@ -86,7 +86,11 @@ const ProfileRequestPage = () => {
                     {selectedProfile.socials && selectedProfile.socials.map((media, index) =>
                         <Row key={"media"+index}>
                             <Col sm={2}>
-                                <SocialIcon url={media}/>
+                                <SocialIcon 
+                                    key={"media"+index} 
+                                    url={media.includes("https") ? media : "https://"+media}
+                                    target="_blank"
+                                />
                             </Col>
                             <Col>
                                 <h5>{media}</h5>

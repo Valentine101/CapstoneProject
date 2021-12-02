@@ -18,7 +18,12 @@ const AlumniCard = (props) => {
                 <Card.Subtitle className="mb-2 text-muted">{props.city}, {props.state}</Card.Subtitle>
                 <Card.Subtitle className="mb-2 text-muted">{props.major}</Card.Subtitle>
                 {props.socials && props.socials.map((media,index) =>
-                    <SocialIcon style={{ marginLeft: "0.5em" }} key={"media"+index} url={media}/>
+                    <SocialIcon 
+                        style={{ marginLeft: "0.5em" }} 
+                        key={"media"+index} 
+                        url={media.includes("https") ? media : "https://"+media}
+                        target="_blank"
+                    />
                 )}
             </Card.Body>
         </Card>
